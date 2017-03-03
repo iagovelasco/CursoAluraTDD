@@ -31,6 +31,15 @@ public class TestAvaliador {
 		this.jose = new Usuario("Jose");
 	}
 	
+	@Test(expected=RuntimeException.class)
+	public void naoDeveAvaliarLeilaoSemNenhumLance(){
+		Leilao leilao = new	CriadorDeLeilao().para("Paly").constroi();
+		
+		leiloeiro.avalia(leilao);
+	}
+	 
+	
+	
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
 		
@@ -165,14 +174,4 @@ public class TestAvaliador {
 	        assertEquals(100, maiores.get(1).getValor(), 0.00001);
 	    }
 
-	    @Test
-	    public void deveDevolverListaVaziaCasoNaoHajaLances() {
-	        Leilao leilao = new Leilao("Playstation 3 Novo");
-	        
-	        leiloeiro.avalia(leilao);
-
-	        List<Lance> maiores = leiloeiro.getTresMaiores();
-
-	        assertEquals(0, maiores.size());
-	    }
 }
